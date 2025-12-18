@@ -18,24 +18,24 @@ export function ProductList() {
 
     // 3️⃣ Effet : appel API
     useEffect(() => {
-        let cancelled = false;
+            setProducts([
+                {
+                    id: 2,
+                    name: 'Produit test',
+                    price: 10,
+                    internal: false,
+                },
+                {
+                    id: 3,
+                    name: 'Produit test3',
+                    price: 10,
+                    internal: true,
+                },
+            ]);
 
-        async function loadProducts() {
-            const response = await fetch('/api/products');
-            const data: Product[] = await response.json();
-
-            if (!cancelled) {
-                setProducts(data);
-                setLoading(false);
-            }
-        }
-
-        loadProducts();
-
-        return () => {
-            cancelled = true;
-        };
-    }, []);
+            setLoading(false);
+        },
+        []);
 
     // 4️⃣ Calcul optimisé
     const visibleProducts = useMemo(() => {
